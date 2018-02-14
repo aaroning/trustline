@@ -38,10 +38,10 @@ public class TrustlineResource {
 			JsonNode payment = mapper.readTree(request);
 			accountService.receivePayment(payment.get("amount").asInt());
 		} catch (IOException e) {
-			return Response.status(500).build();
+			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		
-		return Response.status(200).build();
+		return Response.status(Response.Status.OK).build();
 	}
 	
 	@GET
