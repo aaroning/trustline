@@ -1,5 +1,7 @@
 package com.trustline.controller;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -10,6 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.trustline.domain.Payment;
 import com.trustline.service.AccountService;
@@ -26,9 +31,16 @@ public class TrustlineResource {
 	
 	@POST
 	@Path("/account")
-    @Consumes(MediaType.APPLICATION_XML)
-	public Response receiveFunds(Payment payment) {
-		accountService.receivePayment(payment.getAmount());
+    @Consumes(MediaType.APPLICATION_JSON)
+	public Response receiveFunds(String request) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			JsonNode payment = mapper.readTree(request);
+			accountService.receivePayment(payment.get("amount").asInt());
+		} catch (IOException e) {
+			return Response.status(500).build();
+		}
+		
 		return Response.status(200).build();
 	}
 	

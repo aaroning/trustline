@@ -8,7 +8,6 @@ import java.util.Set;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.google.inject.servlet.ServletModule;
 import com.sun.jersey.api.core.PackagesResourceConfig;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;

@@ -33,7 +33,7 @@ public class TrustlineResourceTest {
 	public void receiveFunds_calls_accountService() {
 		Payment payment = new Payment();
 		payment.setAmount(69);
-		Response response = trustlineResource.receiveFunds(payment);
+		Response response = trustlineResource.receiveFunds("{\"amount\": 69}");
 		verify(accountService).receivePayment(69);
 		assertEquals(200, response.getStatus());
 	}

@@ -37,7 +37,7 @@ public class SingleUserAccountService implements AccountService {
 	@Override
 	public void sendPayment(String recipient, int payment) {
 		LOG.info("Paying {} to {}", payment, recipient);
-		client.sendMoney(recipient);
+		client.sendMoney(recipient, payment);
 		balance.addAndGet(-payment);
 		outputBalance();
 	}

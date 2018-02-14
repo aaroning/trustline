@@ -1,31 +1,19 @@
 package com.trustline.client;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Properties;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.trustline.runtime.Trustline;
 
 public class TrustlineClient {
 	
 	private static final Logger LOG = LogManager.getLogger();
-	
-	Client client = ClientBuilder.newClient();
 	
 	Properties props = new Properties();
 	
@@ -37,14 +25,19 @@ public class TrustlineClient {
 		} 
 	}
 	
-	public void sendMoney(String recipient) {
+	public void sendMoney(String recipient, int payment) {
 		try {
-			//String targetPort = props.getProperty(recipient);
-			String targetPort="8081";
-			WebTarget webTarget = client.target("http://localhost:" + targetPort + "/trustline/account");
-			Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_XML);
-			Response response = invocationBuilder.get();
-			
+			String targetPort = props.getProperty(recipient);
+			URL obj = new URL("http://localhost:" + targetPort + "/trustline/account");
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			con.setRequestMethod("POST");
+			con.setRequestProperty("content-Type", "application/json");
+			con.setDoOutput(true);
+			String body = "{\"amount\":" + payment + "}";
+			con.setRequestProperty("Content-Length", Integer.toString(body.length()));
+			con.getOutputStream().write(body.getBytes("UTF8"));
+			con.getOutputStream().close();
+		
 			LOG.info("Sent");
 
 		} catch (Exception e) {
