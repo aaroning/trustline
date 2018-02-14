@@ -4,6 +4,6 @@ public interface AccountService {
 
 	void receivePayment(int payment);
 
-	void sendPayment(String name, int payment);
+	void sendPayment(String name, int payment) throws Exception;
 
 }

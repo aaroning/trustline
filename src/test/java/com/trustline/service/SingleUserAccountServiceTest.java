@@ -37,7 +37,7 @@ public class SingleUserAccountServiceTest  {
 	}
 	
 	@Test
-	public void sendPayment_calls_client_and_decrements_balance() {
+	public void sendPayment_calls_client_and_decrements_balance() throws Exception {
 		int balance = singleUserAccountService.balance.get();
 		singleUserAccountService.sendPayment(RECIPIENT_NAME, 20);
 	}
