@@ -8,6 +8,6 @@ public class InitializeModulesContextListener extends GuiceServletContextListene
     
 	@Override
     protected Injector getInjector() {
-        return Guice.createInjector(new JerseyResourcesModule(), new AccountServiceModule());
+        return Guice.createInjector(new JerseyResourcesModule(), new AccountServiceModule(), new TrustlineClientModule());
     }
 }

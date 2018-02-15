@@ -19,23 +19,18 @@ public class TrustlineClient {
 	
 	private static final Logger LOG = LogManager.getLogger();
 	
-	Properties userRegistry = new Properties();
+	Properties userRegistry;
 	
 	@Inject
 	public TrustlineClient(Properties userRegistry) {
 		this.userRegistry = userRegistry;
-//		try {
-//			props.load(new FileInputStream("./src/main/resources/userRegistry.properties"));
-//		} catch (Exception e) {
-//			LOG.error("Error loading user registry", e);
-//		} 
 	}
 	
 	public void sendMoney(String recipient, int payment) throws Exception {
 		try {
 			String targetPort = userRegistry.getProperty(recipient);
 			if (targetPort == null) {
-				throw new RuntimeException("user " + recipient + "not found in registry");
+				throw new RuntimeException("user " + recipient + " not found in registry");
 			}
 			URL url = createURL(targetPort);
 			HttpURLConnection con = getConnection(url);
