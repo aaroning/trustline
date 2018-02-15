@@ -13,8 +13,20 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import com.google.inject.servlet.GuiceFilter;
 import com.trustline.config.guice.InitializeModulesContextListener;
 
+/**
+ * This class is responsible for starting the service and adding the Guice filter for DI
+ * 
+ * @author aingber
+ *
+ */
 public class Trustline {
 
+	/**
+	 * Start Jetty programatically.
+	 * 
+	 * @param port
+	 * @throws Exception
+	 */
 	private static void startJettyContainer(int port) throws Exception {
 		Server server = new Server(port);
 		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);

@@ -21,6 +21,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.trustline.domain.Payment;
 import com.trustline.service.AccountService;
 
+/**
+ * The controller handling all requests to this service
+ * 
+ * @author aingber
+ *
+ */
 @Path("/trustline")
 public class TrustlineResource {
 	
@@ -33,6 +39,13 @@ public class TrustlineResource {
 		this.accountService = accountService;
 	}
 	
+	
+	/**
+	 * To make this rest-y, I am posting a value to an account, where account is the resource. This can't be a PUT, since puts are meant to be idempotent
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@POST
 	@Path("/account")
     @Consumes(MediaType.APPLICATION_JSON)

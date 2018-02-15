@@ -15,6 +15,13 @@ import org.apache.logging.log4j.Logger;
 
 import com.trustline.runtime.Trustline;
 
+
+/**
+ * A simple client to send a json payload to send debt to another party
+ * 
+ * @author aingber
+ *
+ */
 public class TrustlineClient {
 	
 	private static final Logger LOG = LogManager.getLogger();
@@ -26,6 +33,13 @@ public class TrustlineClient {
 		this.userRegistry = userRegistry;
 	}
 	
+	/**
+	 * Send the payment to this recipient. Looks up the server via a user registry
+	 * 
+	 * @param recipient the person to send the debt to
+	 * @param payment the amount
+	 * @throws Exception
+	 */
 	public void sendMoney(String recipient, int payment) throws Exception {
 		try {
 			String targetPort = userRegistry.getProperty(recipient);

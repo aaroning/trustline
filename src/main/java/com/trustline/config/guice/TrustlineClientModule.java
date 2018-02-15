@@ -10,6 +10,12 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.trustline.client.TrustlineClient;
 
+/**
+ * Sets up the client to be injected with the service registry
+ * 
+ * @author aingber
+ *
+ */
 public class TrustlineClientModule extends AbstractModule {
 	
 	private static final Logger LOG = LogManager.getLogger();
@@ -24,7 +30,5 @@ public class TrustlineClientModule extends AbstractModule {
 		} 
 		bind(Properties.class).toInstance(userRegistry);
 		bind(TrustlineClient.class).in(Singleton.class);
-
-		
 	}
 }

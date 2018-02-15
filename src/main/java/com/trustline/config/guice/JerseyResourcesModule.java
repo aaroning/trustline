@@ -12,6 +12,12 @@ import com.google.inject.servlet.ServletModule;
 import com.sun.jersey.api.core.PackagesResourceConfig;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 
+/**
+ * Sets the classes in the com.trustline.controller to be jersey resources
+ * 
+ * @author aingber
+ *
+ */
 public class JerseyResourcesModule extends ServletModule {
    
 	@Override
