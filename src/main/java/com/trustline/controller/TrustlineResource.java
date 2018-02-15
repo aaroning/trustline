@@ -17,16 +17,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.stereotype.Component;
 
 import com.trustline.domain.Payment;
 import com.trustline.service.AccountService;
 
 /**
- * The controller handling all requests to this service
+ * The controller handling all requests to this service. We need the component annotation in case we want to use a spring/jersey integration. We don't need it for Guice.
  * 
  * @author aingber
  *
  */
+@Component
 @Path("/trustline")
 public class TrustlineResource {
 	
@@ -61,6 +63,13 @@ public class TrustlineResource {
 		return Response.status(Response.Status.OK).build();
 	}
 	
+	/**
+	 * Send funds to a recipient.
+	 * 
+	 * @param recipient
+	 * @param amount
+	 * @return
+	 */
 	@GET
 	@Path("/sendFunds")
 	public Response sendFunds(@QueryParam("recipient") String recipient, @QueryParam("amount") String amount) {
