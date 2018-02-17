@@ -1,1 +1,1 @@
-java -jar target/trustline-1.0-SNAPSHOT-jar-with-dependencies.jar $1
+java -jar target/trustline-1.0-SNAPSHOT-jar-with-dependencies.jar $1 & echo "$!" > trustline-process-$1.pid

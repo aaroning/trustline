@@ -1,0 +1,1 @@
+kill `cat trustline-process-$1.pid`

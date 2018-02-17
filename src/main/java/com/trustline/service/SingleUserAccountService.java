@@ -36,13 +36,13 @@ public class SingleUserAccountService implements AccountService {
 
 	@Override
 	public void sendPayment(String recipient, int payment) throws Exception {
-		LOG.info("Paying {} to {}", payment, recipient);
+		LOG.info("Paying {} to {}...", payment, recipient);
 		client.sendMoney(recipient, payment);
 		balance.addAndGet(-payment);
 		outputBalance();
 	}
 	
 	private void outputBalance() {
-		LOG.info("Trustline balance is {}", balance.get());
+		LOG.info("Trustline balance is: {}", balance.get());
 	}
 }
